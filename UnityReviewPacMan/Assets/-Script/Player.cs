@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Player : MonoBehaviour
 {
     private CharacterController characterController;
     [SerializeField]private float speed = 10f;
+    public NavMeshAgent agent;
     
     // Start is called before the first frame update
     void Start()
@@ -36,5 +38,8 @@ public class Player : MonoBehaviour
         {
             transform.rotation = Quaternion.Euler(0.0f, 0f, 0.0f);
         }
+
+        //Nav Mesh
+        agent.SetDestination(transform.position);
     }
 }
