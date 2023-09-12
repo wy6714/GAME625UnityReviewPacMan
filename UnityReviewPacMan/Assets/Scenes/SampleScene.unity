@@ -32055,6 +32055,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pellet
       objectReference: {fileID: 0}
+    - target: {fileID: 3640535131933689133, guid: 9dc2a4e7380a341ab87019a66570d2cd, type: 3}
+      propertyPath: m_TagString
+      value: pellet
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
