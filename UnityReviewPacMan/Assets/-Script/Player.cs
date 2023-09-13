@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -27,6 +28,9 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI ScoreText;
     public TextMeshProUGUI livesText;
 
+    public AudioSource collectSound;
+    public AudioSource deadedSound;
+    public AudioSource powerUpSound;
     //private Vector3 originalScale;
 
     // Start is called before the first frame update
@@ -42,7 +46,7 @@ public class Player : MonoBehaviour
     {
         if (lives < 0)
         {
-            gameOver();
+            SceneManager.LoadScene("loss");
         }
 
         Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
@@ -87,6 +91,7 @@ public class Player : MonoBehaviour
         if (other.CompareTag("pellet"))//player get pellet
         {
             Destroy(other.gameObject);
+            collectSound.Play();
             score += pelletPoint;
             
             //Debug.Log(score);
@@ -94,6 +99,7 @@ public class Player : MonoBehaviour
 
         if (other.CompareTag("powerUpPellet"))//player get power up pellet
         {
+            powerUpSound.Play();
             Destroy(other.gameObject);
             score += powerUpPelletPoint;
             //ScoreText.text = "score: " + score.ToString();
@@ -104,12 +110,14 @@ public class Player : MonoBehaviour
 
         if (other.CompareTag("enemy") && !enemyFrozen) //player eaten by enemy
         {
+            deadedSound.Play();
             StartCoroutine(DelayedPositionChange(targetPosition));
             lives -= 1;
             Debug.Log("lives -1");
         }
         else if (other.CompareTag("enemy") && enemyFrozen)//enemy eaten by player
         {
+            collectSound.Play();
             other.gameObject.transform.position = enemyTargetPos;
             score += 200;
             //ScoreText.text = "score: " + score.ToString();
@@ -132,11 +140,7 @@ public class Player : MonoBehaviour
         gameObject.transform.position = newPosition;
     }
 
-    private void gameOver()
-    {
-        //reload the scene from the start
-        Debug.Log("game over");
-    }
+  
     
 
 
