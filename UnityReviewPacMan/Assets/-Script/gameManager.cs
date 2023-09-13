@@ -29,5 +29,18 @@ public class gameManager : MonoBehaviour
         SceneManager.LoadScene("scene02");
     }
 
-    
+    public void playAgainButton()
+    {
+        clickPlay.Play();
+        Invoke("goScene01", 1.1f);
+    }
+
+    public void goScene01()
+    {
+        SceneManager.LoadScene("scene01");
+    }
+
+
+
+
 }
