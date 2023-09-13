@@ -900,6 +900,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2548431004362146491, guid: 9dc2a4e7380a341ab87019a66570d2cd, type: 3}
   m_PrefabInstance: {fileID: 50068503}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &52323722
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 52323723}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &52323723
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 52323722}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &54585495
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13229,8 +13260,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.54416734, y: 0.0020187572, z: -0.0013130642, w: -0.83897334}
-  m_LocalPosition: {x: 6.4004583, y: 49.59817, z: -23.750662}
+  m_LocalRotation: {x: -0.28195342, y: -0.020715147, z: 0.006088759, w: -0.9591851}
+  m_LocalPosition: {x: -1.0908518, y: 32.15174, z: -42.16844}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -31885,6 +31916,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1923367737754736206, guid: a083af116da25469e982a92d807a7707, type: 3}
+      propertyPath: m_Radius
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1923367737754736206, guid: a083af116da25469e982a92d807a7707, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2698083930627754948, guid: a083af116da25469e982a92d807a7707, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.4
@@ -32312,3 +32351,4 @@ SceneRoots:
   - {fileID: 3522400301263809691}
   - {fileID: 823884916}
   - {fileID: 1362200280820251102}
+  - {fileID: 52323723}

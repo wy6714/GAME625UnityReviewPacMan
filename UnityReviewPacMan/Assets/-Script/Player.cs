@@ -7,12 +7,11 @@ public class Player : MonoBehaviour
 {
 
     private Vector3 targetPosition = new Vector3(1.4f, 0f, -16f);
-    private Vector3 hidePosition = new Vector3(100f, 0f, 100f);
+    private Vector3 enemyTargetPos = new Vector3(0f, 0f, 0f);
 
     private CharacterController characterController;
 
     private float frezeDuration = 5f;
-    private float deathDuration = 2f;
 
     [SerializeField]private float speed = 10f;
 
@@ -22,6 +21,7 @@ public class Player : MonoBehaviour
     private int lives = 3;
 
     private bool enemyFrozen = false;
+    private bool canMove = true;
 
     //private Vector3 originalScale;
     
@@ -57,6 +57,15 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.Euler(0.0f, 0f, 0.0f);
         }
 
+        if (enemyFrozen)
+        {
+            transform.localScale = new Vector3(2f, 2f, 2f);
+        }
+        else
+        {
+            transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+
         
     }
 
@@ -80,13 +89,13 @@ public class Player : MonoBehaviour
 
         if (other.CompareTag("enemy") && !enemyFrozen) //player eaten by enemy
         {
-            StartCoroutine(playerDeath());
+            StartCoroutine(DelayedPositionChange(targetPosition));
             lives -= 1;
             Debug.Log("lives -1");
         }
         else if (other.CompareTag("enemy") && enemyFrozen)//enemy eaten by player
         {
-            Destroy(other.gameObject);
+            other.gameObject.transform.position = enemyTargetPos;
             score += 200;
             Debug.Log("eat enemy");
         }
@@ -101,16 +110,30 @@ public class Player : MonoBehaviour
 
 
     }
-    private IEnumerator playerDeath()
+    private IEnumerator DelayedPositionChange(Vector3 newPosition)
     {
-        yield return new WaitForSeconds(0.01f);
-        transform.position = hidePosition;
-        
-        yield return new WaitForSeconds(deathDuration);
-        
-        transform.position = targetPosition;
-        
+        yield return new WaitForSeconds(0.1f); // Adjust the delay as needed
+        gameObject.transform.position = newPosition;
     }
+    //private IEnumerator playerDeath()
+    //{
+    //    yield return new WaitForSeconds(0.001f);
+    //    transform.position = new Vector3 (transform.position.x, transform.position.y - 3, transform.position.z);
+
+    //    yield return new WaitForSeconds(deathDuration);
+
+    //    transform.position = new Vector3 (0,0,0);
+
+    //}
+    //private IEnumerator enemyDeath()
+    //{
+    //    yield return new WaitForSeconds(0.001f);
+    //    deadedEnemy.transform.position = hidePosition;
+
+    //    yield return new WaitForSeconds(deathDuration);
+    //    deadedEnemy.transform.position = enemyTargetPos;
+
+    //}
 
 
 
