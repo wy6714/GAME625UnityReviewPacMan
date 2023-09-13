@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     private bool canMove = true;
 
     public TextMeshProUGUI ScoreText;
+    public TextMeshProUGUI livesText;
 
     //private Vector3 originalScale;
 
@@ -39,6 +40,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (lives < 0)
+        {
+            gameOver();
+        }
+
         Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         characterController.Move(move * speed * Time.deltaTime);
 
@@ -69,7 +75,11 @@ public class Player : MonoBehaviour
             transform.localScale = new Vector3(1f, 1f, 1f);
         }
 
-        
+        ScoreText.text = "score: " + score.ToString();
+
+        livesText.text = "lives: " + lives.ToString();
+
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -78,7 +88,7 @@ public class Player : MonoBehaviour
         {
             Destroy(other.gameObject);
             score += pelletPoint;
-            ScoreText.text = "score: " + score.ToString();
+            
             //Debug.Log(score);
         }
 
@@ -86,6 +96,7 @@ public class Player : MonoBehaviour
         {
             Destroy(other.gameObject);
             score += powerUpPelletPoint;
+            //ScoreText.text = "score: " + score.ToString();
             StartCoroutine(FreezeForDuration());
 
             Debug.Log(score);
@@ -101,6 +112,7 @@ public class Player : MonoBehaviour
         {
             other.gameObject.transform.position = enemyTargetPos;
             score += 200;
+            //ScoreText.text = "score: " + score.ToString();
             Debug.Log("eat enemy");
         }
 
@@ -118,6 +130,12 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f); 
         gameObject.transform.position = newPosition;
+    }
+
+    private void gameOver()
+    {
+        //reload the scene from the start
+        Debug.Log("game over");
     }
     
 
