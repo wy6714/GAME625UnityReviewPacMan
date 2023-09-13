@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class gameManager : MonoBehaviour
 {
     public AudioSource clickPlay;
+
     // Start is called before the first frame update
     void Start()
     {

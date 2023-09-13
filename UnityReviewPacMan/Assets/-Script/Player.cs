@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     private int lives = 3;
 
     private bool enemyFrozen = false;
-    private bool canMove = true;
+    
 
     public TextMeshProUGUI ScoreText;
     public TextMeshProUGUI livesText;
@@ -31,14 +31,20 @@ public class Player : MonoBehaviour
     public AudioSource collectSound;
     public AudioSource deadedSound;
     public AudioSource powerUpSound;
+
+    [SerializeField]private int totalCount;
     //private Vector3 originalScale;
 
     // Start is called before the first frame update
     void Start()
     {
         characterController = GetComponent<CharacterController>();
-        
-       
+
+        GameObject[] pellets = GameObject.FindGameObjectsWithTag("pellet");
+        GameObject[] powerUps = GameObject.FindGameObjectsWithTag("powerUpPellet");
+
+        totalCount = pellets.Length + powerUps.Length;
+
     }
 
     // Update is called once per frame
@@ -47,6 +53,11 @@ public class Player : MonoBehaviour
         if (lives < 0)
         {
             SceneManager.LoadScene("loss");
+        }
+
+        if (totalCount == 0)
+        {
+            SceneManager.LoadScene("win");
         }
 
         Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
@@ -90,15 +101,15 @@ public class Player : MonoBehaviour
     {
         if (other.CompareTag("pellet"))//player get pellet
         {
+            totalCount -= 1;
             Destroy(other.gameObject);
             collectSound.Play();
             score += pelletPoint;
-            
-            //Debug.Log(score);
         }
 
         if (other.CompareTag("powerUpPellet"))//player get power up pellet
         {
+            totalCount -= 1;
             powerUpSound.Play();
             Destroy(other.gameObject);
             score += powerUpPelletPoint;
@@ -140,8 +151,6 @@ public class Player : MonoBehaviour
         gameObject.transform.position = newPosition;
     }
 
-  
-    
-
+   
 
 }
