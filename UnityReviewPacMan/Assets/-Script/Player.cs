@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
@@ -23,8 +24,10 @@ public class Player : MonoBehaviour
     private bool enemyFrozen = false;
     private bool canMove = true;
 
+    public TextMeshProUGUI ScoreText;
+
     //private Vector3 originalScale;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,7 +78,8 @@ public class Player : MonoBehaviour
         {
             Destroy(other.gameObject);
             score += pelletPoint;
-            Debug.Log(score);
+            ScoreText.text = "score: " + score.ToString();
+            //Debug.Log(score);
         }
 
         if (other.CompareTag("powerUpPellet"))//player get power up pellet
@@ -112,29 +116,10 @@ public class Player : MonoBehaviour
     }
     private IEnumerator DelayedPositionChange(Vector3 newPosition)
     {
-        yield return new WaitForSeconds(0.1f); // Adjust the delay as needed
+        yield return new WaitForSeconds(0.1f); 
         gameObject.transform.position = newPosition;
     }
-    //private IEnumerator playerDeath()
-    //{
-    //    yield return new WaitForSeconds(0.001f);
-    //    transform.position = new Vector3 (transform.position.x, transform.position.y - 3, transform.position.z);
-
-    //    yield return new WaitForSeconds(deathDuration);
-
-    //    transform.position = new Vector3 (0,0,0);
-
-    //}
-    //private IEnumerator enemyDeath()
-    //{
-    //    yield return new WaitForSeconds(0.001f);
-    //    deadedEnemy.transform.position = hidePosition;
-
-    //    yield return new WaitForSeconds(deathDuration);
-    //    deadedEnemy.transform.position = enemyTargetPos;
-
-    //}
-
+    
 
 
 }
