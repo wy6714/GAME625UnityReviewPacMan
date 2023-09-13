@@ -32,8 +32,9 @@ public class Player : MonoBehaviour
     public AudioSource deadedSound;
     public AudioSource powerUpSound;
 
+
     [SerializeField]private int totalCount;
-    //private Vector3 originalScale;
+  
 
     // Start is called before the first frame update
     void Start()
@@ -94,6 +95,7 @@ public class Player : MonoBehaviour
 
         livesText.text = "lives: " + lives.ToString();
 
+        
 
     }
 
